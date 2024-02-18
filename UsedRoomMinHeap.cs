@@ -11,11 +11,16 @@
 			{
 				int childTwoIdx = curIdx * 2 + 2;
 				int swapIdx = childOneIdx;
-				if (childTwoIdx <= endIdx && heap[childTwoIdx].endTime < heap[childOneIdx].endTime)
+				if (childTwoIdx <= endIdx && 
+					(heap[childTwoIdx].endTime == heap[childOneIdx].endTime ?
+					heap[childTwoIdx].room < heap[childOneIdx].room :
+					heap[childTwoIdx].endTime < heap[childOneIdx].endTime))
 				{
 					swapIdx = childTwoIdx;
 				}
-				if (heap[swapIdx].endTime < heap[curIdx].endTime)
+				if (heap[swapIdx].endTime == heap[curIdx].endTime ?
+					heap[swapIdx].room < heap[curIdx].room :
+					heap[swapIdx].endTime < heap[curIdx].endTime)
 				{
 					(heap[swapIdx], heap[curIdx]) = (heap[curIdx], heap[swapIdx]);
 					curIdx = swapIdx;
@@ -31,7 +36,10 @@
 		private void SiftUp(int curIdx)
 		{
 			int parentIdx = (curIdx - 1) / 2;
-			while (parentIdx >= 0 && heap[parentIdx].endTime > heap[curIdx].endTime)
+			while (parentIdx >= 0 && 
+				(heap[parentIdx].endTime == heap[curIdx].endTime ?
+				heap[parentIdx].room > heap[curIdx].room :
+				heap[parentIdx].endTime > heap[curIdx].endTime))
 			{
 				(heap[parentIdx], heap[curIdx]) = (heap[curIdx], heap[parentIdx]);
 				curIdx = parentIdx;
